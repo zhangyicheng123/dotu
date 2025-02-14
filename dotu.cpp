@@ -24,8 +24,7 @@ struct Variable {
 
     ~Variable() {
         if (!isNumber) {
-            // 这里不需要手动调用析构函数，让 std::string 自动析构
-            // str.~string(); 
+            str.~string();
         }
     }
 
@@ -42,8 +41,7 @@ struct Variable {
     Variable& operator=(Variable&& other) noexcept {
         if (this != &other) {
             if (!isNumber) {
-                // 手动调用析构函数的代码删除
-                // str.~string(); 
+                str.~string();
             }
             name = std::move(other.name);
             isNumber = other.isNumber;
